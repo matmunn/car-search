@@ -18,4 +18,5 @@ RUN pip3 install pipenv && \
 
 USER app
 
+ENTRYPOINT [ "./scripts/start-env.sh" ]
 CMD ./scripts/start-app.sh
