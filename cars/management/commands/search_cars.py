@@ -5,12 +5,15 @@ A command to search carsales.
 import json
 
 import requests
-from cfscrape import create_scraper
+import cfscrape
 
 from bs4 import BeautifulSoup
 from django.core.management.base import BaseCommand
 
 from cars.models import Car
+
+
+cfscrape.DEFAULT_CIPHERS = 'TLS_AES_256_GCM_SHA384:ECDHE-ECDSA-AES256-SHA384'
 
 
 class Command(BaseCommand):
@@ -21,7 +24,7 @@ class Command(BaseCommand):
     help = "A command to search for new cars for sale."
 
     def handle(self, *args, **options):
-        scraper = create_scraper()
+        scraper = cfscrape.create_scraper()
         response = scraper.get('https://www.carsales.com.au/cars/?q=(And.Price.range(..87000)._.Cylinders.8._.Drive.4x4._.(Or.BodyStyle.Cab+Chassis._.BodyStyle.Ute.)_.FuelType.Petrol+-+Unleaded+ULP._.Year.range(2014..).)&sort=~Price')
         soup = BeautifulSoup(response.content, 'html.parser')
         elem = soup.find(type='application/ld+json')
