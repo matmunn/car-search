@@ -24,7 +24,14 @@ class Command(BaseCommand):
         scraper = create_scraper(delay=10)
         response = scraper.get('https://www.carsales.com.au/cars/?q=(And.Price.range(..87000)._.Cylinders.8._.Drive.4x4._.(Or.BodyStyle.Cab+Chassis._.BodyStyle.Ute.)_.FuelType.Petrol+-+Unleaded+ULP._.Year.range(2014..).)&sort=~Price')
         soup = BeautifulSoup(response.content, 'html.parser')
-        data = json.loads(soup.find(type='application/ld+json').string)
+        elem = soup.find(type='application/ld+json')
+
+        if elem is None:
+            self.stderr.write("The data could not be found.")
+            self.stdout.write(response.content)
+            return
+
+        data = json.loads(elem.string)
         try:
             cars = data["mainEntity"]["itemListElement"]
         except KeyError:
