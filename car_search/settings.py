@@ -115,7 +115,7 @@ LOGGING = {
         }
     },
     'loggers': {
-        'testlogger': {
+        '': {
             'handlers': ['console'],
             'level': 'INFO',
         }
