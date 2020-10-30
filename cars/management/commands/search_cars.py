@@ -15,7 +15,7 @@ from cars.models import Car
 
 class Command(BaseCommand):
     """
-    A command to search carsales.com.au
+    A command to search carsales.com.au 
     """
 
     help = "A command to search for new cars for sale."
