@@ -25,10 +25,9 @@ class Command(BaseCommand):
         response = scraper.get('https://www.carsales.com.au/cars/?q=(And.Price.range(..87000)._.Cylinders.8._.Drive.4x4._.(Or.BodyStyle.Cab+Chassis._.BodyStyle.Ute.)_.FuelType.Petrol+-+Unleaded+ULP._.Year.range(2014..).)&sort=~Price')
         soup = BeautifulSoup(response.content, 'html.parser')
         elem = soup.find(type='application/ld+json')
-
         if elem is None:
             self.stderr.write("The data could not be found.")
-            self.stdout.write(response.content)
+            self.stdout.write(str(response.content))
             return
 
         data = json.loads(elem.string)
