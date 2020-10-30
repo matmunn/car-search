@@ -10,7 +10,8 @@ RUN groupadd -r app && \
 WORKDIR /app
 COPY . .
 
-ENV VIRTUALENV_BASE "/virtualenv"
+ENV VIRTUALENV_BASE="/virtualenv" \
+    DEBIAN_FRONTEND=noninteractive
 
 RUN set -ex && \
     apt-get update && \
