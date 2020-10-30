@@ -18,4 +18,4 @@ RUN pip3 install pipenv && \
 
 USER app
 
-CMD ./start-app.sh
+CMD ./scripts/start-app.sh
