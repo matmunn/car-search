@@ -11,7 +11,10 @@ COPY . .
 ENV VIRTUALENV_BASE "/virtualenv"
 
 RUN set -ex && \
-    curl -sL https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add -  && \
+    apt-get update && \
+    apt-get install -y --no-install-recommends gnupg
+
+RUN curl -sL https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add -  && \
     echo 'deb http://deb.nodesource.com/node_12.x buster main' > /etc/apt/sources.list.d/nodesource.list && \
     apt-get update && \
     apt-get install -y --no-install-recommends nodejs python3 && \
