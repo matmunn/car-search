@@ -1,4 +1,4 @@
-FROM debian:buster
+FROM nikolaik/python-nodejs:python3.8-nodejs12
 
 USER root
 
@@ -13,17 +13,8 @@ COPY . .
 ENV VIRTUALENV_BASE="/virtualenv" \
     DEBIAN_FRONTEND=noninteractive
 
-RUN set -ex && \
-    apt-get update && \
-    apt-get install -y --no-install-recommends gnupg curl
-
-RUN curl -sL https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add - && \
-    echo 'deb http://deb.nodesource.com/node_12.x buster main' > /etc/apt/sources.list.d/nodesource.list && \
-    apt-get update && \
-    apt-get install -y --no-install-recommends nodejs python3 && \
-    pip3 install pipenv && \
-    ./scripts/install-deps.sh && \
-    rm -rf /var/lib/apt/lists/*
+RUN pip3 install pipenv && \
+    ./scripts/install-deps.sh
 
 USER app
 
