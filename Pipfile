@@ -12,6 +12,7 @@ requests = "*"
 cfscrape = "*"
 gunicorn = "*"
 whitenoise = "*"
+dj-database-url = "*"
 
 [requires]
 python_version = "3.8"
