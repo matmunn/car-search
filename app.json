@@ -1,0 +1,14 @@
+{
+  "name": "Car Search",
+  "description": "An app for finding cars.",
+  "image": "heroku/python",
+  "repository": "https://github.com/matmunn/car-search",
+  "keywords": ["python", "django" ],
+  "addons": [ "heroku-postgresql" ],
+  "env": {
+    "SECRET_KEY": {
+      "description": "The secret key for the Django application.",
+      "generator": "secret"
+    }
+  }
+}
