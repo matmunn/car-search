@@ -162,3 +162,7 @@ STATIC_URL = '/static/'
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+PLIVO_AUTH_ID = os.environ.get('PLIVO_AUTH_ID')
+PLIVO_AUTH_TOKEN = os.environ.get('PLIVO_AUTH_TOKEN')
+PLIVO_TARGET_PHONE = os.environ.get('PLIVO_TARGET_PHONE')

@@ -8,7 +8,9 @@ import requests
 import cfscrape
 
 from bs4 import BeautifulSoup
+from django.conf import settings
 from django.core.management.base import BaseCommand
+from plivo import RestClient
 
 from cars.models import Car
 
@@ -39,6 +41,7 @@ class Command(BaseCommand):
         except KeyError:
             return
 
+        created_objs = []
         for car in cars:
             data = car["item"]
             try:
@@ -60,4 +63,19 @@ class Command(BaseCommand):
                 }
             )
             print(instance.__dict__)
+            # if created:
+            created_objs += [instance]
+
+        if len(created_objs) > 0:
+            with RestClient(auth_id=settings.PLIVO_AUTH_ID, auth_token=settings.PLIVO_AUTH_TOKEN) as client:
+                if len(created_objs) > 1:
+                    client.messages.create(
+                        dst=settings.PLIVO_TARGET_PHONE,
+                        text=f"{len(created_objs)} new cars found for sale."
+                    )
+                else:
+                    client.messages.create(
+                        dst=settings.PLIVO_TARGET_PHONE,
+                        text=f"A new car was found for sale. {created_objs[0].url}"
+                    )
 
