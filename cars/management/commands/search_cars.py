@@ -63,8 +63,8 @@ class Command(BaseCommand):
                 }
             )
             print(instance.__dict__)
-            # if created:
-            created_objs += [instance]
+            if created:
+                created_objs += [instance]
 
         if len(created_objs) > 0:
             with RestClient(auth_id=settings.PLIVO_AUTH_ID, auth_token=settings.PLIVO_AUTH_TOKEN) as client:
