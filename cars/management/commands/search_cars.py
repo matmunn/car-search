@@ -70,11 +70,13 @@ class Command(BaseCommand):
             with RestClient(auth_id=settings.PLIVO_AUTH_ID, auth_token=settings.PLIVO_AUTH_TOKEN) as client:
                 if len(created_objs) > 1:
                     client.messages.create(
+                        src=settings.PLIVO_TARGET_PHONE,
                         dst=settings.PLIVO_TARGET_PHONE,
                         text=f"{len(created_objs)} new cars found for sale."
                     )
                 else:
                     client.messages.create(
+                        src=settings.PLIVO_TARGET_PHONE,
                         dst=settings.PLIVO_TARGET_PHONE,
                         text=f"A new car was found for sale. {created_objs[0].url}"
                     )
