@@ -18,7 +18,7 @@ from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import path, include
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('', admin.site.urls),
     path(
         "login/",
         LoginView.as_view(
