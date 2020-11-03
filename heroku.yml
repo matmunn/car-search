@@ -3,7 +3,7 @@ setup:
     - plan: heroku-postgresql
       as: DATABASE
     - plan: scheduler
-      as: SCHDULER
+      as: SCHEDULER
 build:
   docker:
     web: Dockerfile
